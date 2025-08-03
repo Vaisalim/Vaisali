@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostureWell - Your Personal Wellness Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>PostureWell</h1>
+                <div class="user-info">
+                    <div class="avatar">AC</div>
+                    <span class="streak">🔥 12 days</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="welcome-card card">
+                    <div class="card__body">
+                        <h2>Good afternoon, Alex! 👋</h2>
+                        <p>Keep up the great work on your wellness journey</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Today's Posture Score</h3>
+                            <div class="posture-gauge">
+                                <div class="gauge-container">
+                                    <canvas id="postureGauge" width="120" height="120"></canvas>
+                                    <div class="gauge-score">85</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Current Mood</h3>
+                            <div class="mood-display">
+                                <span class="mood-emoji">😄</span>
+                                <span class="mood-text">Happy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Steps Today</h3>
+                            <div class="stat-value">7,842</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 78%"></div>
+                                </div>
+                                <span class="progress-text">78% of goal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card card">
+                        <div class="card__body">
+                            <h3>Screen Time</h3>
+                            <div class="stat-value">4.2h</div>
+                            <div class="stat-subtext">today</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-summary card">
+                    <div class="card__body">
+                        <h3>Today's Activities</h3>
+                        <div class="activity-list">
+                            <div class="activity-item completed">
+                                <span class="activity-icon">🔄</span>
+                                <div class="activity-info">
+                                    <span class="activity-name">Neck Stretch</span>
+                                    <span class="activity-duration">2 min</span>
+                                </div>
+                            </div>
+                            <div class="activity-item completed">
+                                <span class="activity-icon">💪</span>
+                                <div class="activity-info">
+                                    <span class="activity-name">Shoulder Rolls</span>
+                                    <span class="activity-duration">3 min</span>
+                                </div>
+                            </div>
+                            <div class="activity-item completed">
+                                <span class="activity-icon">🏃</span>
+                                <div class="activity-info">
+                                    <span class="activity-name">Back Extension</span>
+                                    <span class="activity-duration">5 min</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-icon">🧘</span>
+                                <div class="activity-info">
+                                    <span class="activity-name">Hip Flexor</span>
+                                    <span class="activity-duration">4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Posture Tracking Section -->
+            <section id="posture" class="section">
+                <div class="camera-placeholder card">
+                    <div class="card__body">
+                        <div class="camera-view">
+                            <div class="camera-icon">📷</div>
+                            <h3>Live Posture Analysis</h3>
+                            <p>Camera would show real-time posture feedback here</p>
+                            <div class="posture-status good">
+                                <span class="status-dot"></span>
+                                Good Posture
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="posture-chart-card card">
+                    <div class="card__body">
+                        <h3>Weekly Posture Trend</h3>
+                        <div class="chart-container" style="position: relative; height: 300px;">
+                            <canvas id="postureChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercises-card card">
+                    <div class="card__body">
+                        <h3>Recommended Exercises</h3>
+                        <div class="exercise-list">
+                            <div class="exercise-item">
+                                <div class="exercise-info">
+                                    <h4>🔄 Neck Stretch</h4>
+                                    <p>Gentle neck stretches to relieve tension</p>
+                                    <span class="exercise-duration">2 min</span>
+                                </div>
+                                <button class="btn btn--primary btn--sm">Start</button>
+                            </div>
+                            <div class="exercise-item">
+                                <div class="exercise-info">
+                                    <h4>💪 Shoulder Rolls</h4>
+                                    <p>Strengthen upper back muscles</p>
+                                    <span class="exercise-duration">3 min</span>
+                                </div>
+                                <button class="btn btn--primary btn--sm">Start</button>
+                            </div>
+                            <div class="exercise-item">
+                                <div class="exercise-info">
+                                    <h4>🏃 Back Extension</h4>
+                                    <p>Counter prolonged sitting</p>
+                                    <span class="exercise-duration">5 min</span>
+                                </div>
+                                <button class="btn btn--primary btn--sm">Start</button>
+                            </div>
+                            <div class="exercise-item">
+                                <div class="exercise-info">
+                                    <h4>🧘 Hip Flexor</h4>
+                                    <p>Improve hip flexibility</p>
+                                    <span class="exercise-duration">4 min</span>
+                                </div>
+                                <button class="btn btn--primary btn--sm">Start</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="posture-settings card">
+                    <div class="card__body">
+                        <h3>Settings</h3>
+                        <div class="setting-item">
+                            <span>Posture Alerts</span>
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <span>Break Reminders</span>
+                            <label class="toggle">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mood & Wellness Section -->
+            <section id="wellness" class="section">
+                <div class="mood-selector card">
+                    <div class="card__body">
+                        <h3>How are you feeling today?</h3>
+                        <div class="mood-options">
+                            <button class="mood-option" data-mood="1">😢</button>
+                            <button class="mood-option" data-mood="2">😟</button>
+                            <button class="mood-option" data-mood="3">😐</button>
+                            <button class="mood-option" data-mood="4">🙂</button>
+                            <button class="mood-option" data-mood="5">😊</button>
+                            <button class="mood-option" data-mood="6">😄</button>
+                            <button class="mood-option" data-mood="7">🤗</button>
+                            <button class="mood-option selected" data-mood="8">😍</button>
+                            <button class="mood-option" data-mood="9">🥰</button>
+                            <button class="mood-option" data-mood="10">🤩</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mood-chart-card card">
+                    <div class="card__body">
+                        <h3>Weekly Mood Trend</h3>
+                        <div class="chart-container" style="position: relative; height: 250px;">
+                            <canvas id="moodChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stress-card card">
+                    <div class="card__body">
+                        <h3>Stress Level</h3>
+                        <div class="stress-meter">
+                            <div class="stress-bar">
+                                <div class="stress-fill" style="width: 30%"></div>
+                            </div>
+                            <span class="stress-level">Low (3/10)</span>
+                        </div>
+                        <button class="btn btn--primary">Start Breathing Exercise</button>
+                    </div>
+                </div>
+
+                <div class="meditation-card card">
+                    <div class="card__body">
+                        <h3>Meditation Timer</h3>
+                        <div class="timer-display">
+                            <div class="timer-circle">
+                                <span class="timer-text">15:00</span>
+                            </div>
+                        </div>
+                        <div class="timer-controls">
+                            <button class="btn btn--secondary btn--sm">5 min</button>
+                            <button class="btn btn--secondary btn--sm selected">15 min</button>
+                            <button class="btn btn--secondary btn--sm">30 min</button>
+                        </div>
+                        <button class="btn btn--primary">Start Meditation</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Chat Section -->
+            <section id="chat" class="section">
+                <div class="chat-container card">
+                    <div class="card__body">
+                        <h3>AI Wellness Coach</h3>
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message ai-message">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <p>Great posture improvement this week! 📈</p>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                            </div>
+                            <div class="message user-message">
+                                <div class="message-content">
+                                    <p>Thanks! The reminders really help</p>
+                                    <span class="message-time">10:32 AM</span>
+                                </div>
+                            </div>
+                            <div class="message ai-message">
+                                <div class="message-avatar">🤖</div>
+                                <div class="message-content">
+                                    <p>Keep up the amazing work! Ready for today's challenges?</p>
+                                    <span class="message-time">10:33 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" class="form-control" placeholder="Type your message..." id="chatInput">
+                            <button class="btn btn--primary" id="sendMessage">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-tips card">
+                    <div class="card__body">
+                        <h3>Quick Tips</h3>
+                        <div class="tip-item">
+                            <span class="tip-icon">💡</span>
+                            <p>Take a 30-second posture check every hour</p>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">🌱</span>
+                            <p>Deep breathing can reduce stress in just 2 minutes</p>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-icon">⚡</span>
+                            <p>Short walks boost energy and mood</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Section -->
+            <section id="activity" class="section">
+                <div class="activity-overview card">
+                    <div class="card__body">
+                        <h3>Activity Overview</h3>
+                        <div class="activity-stats">
+                            <div class="activity-stat">
+                                <span class="stat-icon">👟</span>
+                                <div class="stat-info">
+                                    <span class="stat-number">7,842</span>
+                                    <span class="stat-label">Steps</span>
+                                </div>
+                            </div>
+                            <div class="activity-stat">
+                                <span class="stat-icon">📱</span>
+                                <div class="stat-info">
+                                    <span class="stat-number">4.2h</span>
+                                    <span class="stat-label">Screen Time</span>
+                                </div>
+                            </div>
+                            <div class="activity-stat">
+                                <span class="stat-icon">💪</span>
+                                <div class="stat-info">
+                                    <span class="stat-number">3/4</span>
+                                    <span class="stat-label">Exercises</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="break-reminders card">
+                    <div class="card__body">
+                        <h3>Break Reminders</h3>
+                        <div class="reminder-settings">
+                            <div class="reminder-item">
+                                <span>Posture Check</span>
+                                <select class="form-control">
+                                    <option>Every 30 minutes</option>
+                                    <option selected>Every hour</option>
+                                    <option>Every 2 hours</option>
+                                </select>
+                            </div>
+                            <div class="reminder-item">
+                                <span>Movement Break</span>
+                                <select class="form-control">
+                                    <option>Every 30 minutes</option>
+                                    <option selected>Every hour</option>
+                                    <option>Every 2 hours</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise-log card">
+                    <div class="card__body">
+                        <h3>Exercise Log</h3>
+                        <div class="log-entries">
+                            <div class="log-entry">
+                                <span class="log-time">9:00 AM</span>
+                                <span class="log-activity">Neck Stretch - 2 min</span>
+                                <span class="status status--success">Completed</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="log-time">11:30 AM</span>
+                                <span class="log-activity">Shoulder Rolls - 3 min</span>
+                                <span class="status status--success">Completed</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="log-time">2:00 PM</span>
+                                <span class="log-activity">Back Extension - 5 min</span>
+                                <span class="status status--success">Completed</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="log-time">4:00 PM</span>
+                                <span class="log-activity">Hip Flexor - 4 min</span>
+                                <span class="status status--warning">Pending</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--full-width">Add Exercise</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <div class="profile-card card">
+                    <div class="card__body">
+                        <div class="profile-header">
+                            <div class="profile-avatar">AC</div>
+                            <div class="profile-info">
+                                <h3>Alex Chen</h3>
+                                <p>Wellness Warrior • Joined Jan 15, 2024</p>
+                                <span class="premium-badge">Free Plan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-groups">
+                    <div class="settings-group card">
+                        <div class="card__body">
+                            <h3>Notifications</h3>
+                            <div class="setting-item">
+                                <span>Posture Reminders</span>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Break Alerts</span>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Mood Tracking</span>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <span>Exercise Reminders</span>
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group card">
+                        <div class="card__body">
+                            <h3>Goals</h3>
+                            <div class="goal-setting">
+                                <label class="form-label">Daily Posture Score Target</label>
+                                <input type="number" class="form-control" value="80">
+                            </div>
+                            <div class="goal-setting">
+                                <label class="form-label">Weekly Exercises Goal</label>
+                                <input type="number" class="form-control" value="21">
+                            </div>
+                            <div class="goal-setting">
+                                <label class="form-label">Daily Breaks Goal</label>
+                                <input type="number" class="form-control" value="8">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-group card">
+                        <div class="card__body">
+                            <h3>Premium</h3>
+                            <div class="premium-info">
+                                <p>Unlock advanced features with PostureWell Premium</p>
+                                <ul class="premium-features">
+                                    <li>Detailed analytics and insights</li>
+                                    <li>Personalized exercise plans</li>
+                                    <li>Priority AI support</li>
+                                    <li>Export data to health apps</li>
+                                </ul>
+                                <button class="btn btn--primary">Upgrade to Premium</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-item" data-section="posture">
+                <span class="nav-icon">🧘</span>
+                <span class="nav-label">Posture</span>
+            </button>
+            <button class="nav-item" data-section="wellness">
+                <span class="nav-icon">😊</span>
+                <span class="nav-label">Wellness</span>
+            </button>
+            <button class="nav-item" data-section="chat">
+                <span class="nav-icon">💬</span>
+                <span class="nav-label">AI Coach</span>
+            </button>
+            <button class="nav-item" data-section="activity">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Activity</span>
+            </button>
+            <button class="nav-item" data-section="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-label">Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
